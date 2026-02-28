@@ -460,10 +460,3 @@ li a.active {
   display: block;
   color: #49796B;
 }
-
-.footer {
-    flex-shrink: 0;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
