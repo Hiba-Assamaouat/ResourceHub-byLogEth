@@ -32,3 +32,28 @@ This will be essentially applied for point `[5]` from the feature list above whe
 
 Frontend - HTML | CSS | JavaScript <br>
 Backend - 
+
+---
+Quick UI setup
+
+1. Provisional Palette<br>
+<img src="/images/Palette.png" alt="provisional palette" width="500" height="300">
+
+2. Tab selection is initially as follows<br>
+| Home | Events | Spots | Articles | The Latest | Contact | **Sign Up** |
+
+3. Footer will compile a copyright, the tab links, external links to alternate platforms, and a link to the admin portal 
+
+
+--- 
+About the User Sign In Portal
+
+&rarr; for the time-being, sign in will be only powered by Google
+
+---
+About the Admin Portal
+
+&rarr; access requires a sign in with an admin password
+
+This interface, initially, will mainly be for the news recommendation using the Mistral API.<br>
+Further down the line, this page will also allow admin to visualize activity and performance data of the website.
