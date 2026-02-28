@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- LEFT PANEL -->
+  <div class="panel-left">
+    <div class="brand">Studio</div>
+
+    <div class="left-content">
+      <h1>Let's<br><em>talk.</em></h1>
+      <p>Whether you have a question, a project in mind, or just want to say hello — we'd love to hear from you.</p>
+
+      <div class="contact-info">
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="info-text">
+            <span class="info-label">Email</span>
+            <span class="info-value">hello@yourstudio.com</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.07 3 2 2 0 012.03 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.9a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.92z"/></svg>
+          </div>
+          <div class="info-text">
+            <span class="info-label">Phone</span>
+            <span class="info-value">+1 (555) 000-1234</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+          </div>
+          <div class="info-text">
+            <span class="info-label">Location</span>
+            <span class="info-value">Rabat, MA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-footer">© 2025 Log&Eth. All rights reserved.</div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="panel-right">
+    <div class="form-header">
+      <p class="eyebrow">Send a message</p>
+      <h2>We'll get back to you shortly.</h2>
+    </div>
+
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" placeholder="Jane" required />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" placeholder="Doe" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="jane@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" placeholder="+1 (555) 000-0000" />
+        </div>
+      </div>
+
+      <div class="subject-row form-group">
+        <label for="subject">What's this about?</label>
+        <select id="subject" required>
+          <option value="" disabled selected>Select a topic</option>
+          <option value="general">General Inquiry</option>
+          <option value="project">New Project</option>
+          <option value="support">Support</option>
+          <option value="partnership">Partnership</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell us what's on your mind..." required></textarea>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="consent" required />
+        <span>I agree to be contacted by the team regarding my inquiry. View our <a href="#" style="color: var(--teal); text-decoration: none;">privacy policy</a>.</span>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit">Send Message</button>
+        <p class="response-time">Typically replies in <span>24 hrs</span></p>
+      </div>
+    </form>
+
+    <div class="success-overlay" id="successMsg">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Message Sent!</h3>
+      <p>Thank you for reaching out.<br>We'll be in touch within 24 hours.</p>
+    </div>
+  </div>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('successMsg');
+      form.style.animation = 'fadeUp 0.3s ease reverse both';
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.style.display = 'flex';
+        success.style.animation = 'fadeUp 0.5s ease both';
+      }, 280);
+    }
+  </script>
+</body>
+</html>
