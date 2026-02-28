@@ -394,6 +394,6 @@ button[type="submit"]:active {
   .left-footer { display: none; }
 }
 
-a .brand {
+a.brand {
     text-decoration: none;
 }
