@@ -393,3 +393,7 @@ button[type="submit"]:active {
   .form-grid { grid-template-columns: 1fr; }
   .left-footer { display: none; }
 }
+
+a .brand {
+    text-decoration: none;
+}
