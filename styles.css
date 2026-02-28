@@ -108,7 +108,7 @@ li a.active {
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: #f4f4f0;
+      background: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -330,7 +330,7 @@ li a.active {
 
 
 
-
+/* 
 .main-content{
 
 }
@@ -338,7 +338,7 @@ li a.active {
 .landing-content{
 
 }
-
+ */
 
 
 
@@ -356,7 +356,9 @@ li a.active {
   padding: 1rem clamp(1rem, 5vw, 4rem);
 
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  min-height: 50dvh;
 }
 
 .footer-content{
