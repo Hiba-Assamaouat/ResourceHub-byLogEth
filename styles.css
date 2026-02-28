@@ -1,0 +1,110 @@
+/* DEFAULT STYLES FOR ALL PAGES */
+
+/* -- PALETTE -- */
+/* MINT CREAM color: #F9FFF9; */
+/* DARK MINT color: #eef8ef; */
+/* DEEP TEAL color: #49796B; */
+/* DEEP FOREST color: #004225; */
+/* AUTUMN LEAF color: #e86100; */
+
+/* -- FONTS -- */
+/* Title Logo: Rubic Pixels */
+/* Global Font: IBM Plex Sans (for now) */
+
+
+
+
+/* Global and base styling */
+* {
+    background-color: #F9FFF9;
+    color: #004225; /* Text color */
+    font-family: "IBM Plex Sans", sans-serif; 
+    font-optical-sizing: auto; /* Auto-scaling for better readability */
+    font-weight: 400; /* Corrected from '00' to '400' */
+    font-style: normal;
+    /* margin: 10px 50px; */
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+/* * { outline: 1px solid rgb(161, 77, 77,0.5); } */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.logo{
+    font-family: "Rubik Pixels", cursive;
+    font-size: 2.5rem;
+    color: #004225;
+    text-decoration: none;
+}
+
+
+.navbar-wrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+
+  padding: 0.75rem 6rem;
+  margin-top: 2rem;
+
+  transition: box-shadow 0.3s ease, border-bottom 0.2s ease;
+}
+
+
+.navbar{
+  top: 0;
+  width: 100%;
+}
+
+/* Navigation Links */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0rem 1rem;
+    overflow: hidden;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+li {
+    float: left;
+    margin: 0 10px;
+}
+
+li a{
+  text-decoration: none;
+  color: #004225;
+  display: block;
+  padding: 1rem 2rem;
+  transition: 0.2s ease-in-out;
+}
+
+li a:hover {
+    color: #e86100;
+    font-weight: bold;
+}
+
+li a.active {
+    color: #004225;
+    font-weight: bold;
+}
+
+.signUpLink a {
+    background-color: #e86100;
+    color: #F9FFF9;
+    border-radius: 5px;
+    padding: 0.75rem 1.8rem;
+}
+
+.signUpLink a:hover {
+    background-color: #004225;
+    color: #e86100;
+    font-weight: bold;
+}
