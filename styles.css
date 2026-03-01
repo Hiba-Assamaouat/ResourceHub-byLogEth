@@ -658,12 +658,12 @@ li a.active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 2rem;
+  padding: 1rem 4rem;
 }
 .portal-title{
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 2.5rem;
 }
 .LogEth{
   font-family: "Playfair Display", serif;
@@ -679,7 +679,7 @@ li a.active {
   align-items: baseline;
   left: 50%;
   transform: translateX(-50%);
-  height: 56px;
+  height: 80px;
   width: auto;
   object-fit: cover;
 }
