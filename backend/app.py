@@ -1,6 +1,8 @@
 # Flask backend for fetching news suggestions using Mistral API
 
-# [ ] need to input the API key in the .env file and make sure to add .env to .gitignore to avoid exposing it in version control.
+# API key is storedin the .env file and .env is added to .gitignore to avoid exposing it in version control.
+
+#!/usr/bin/env python3
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
