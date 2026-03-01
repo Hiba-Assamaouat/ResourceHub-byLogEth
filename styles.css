@@ -55,6 +55,12 @@ body {
   font-style: normal;
   line-height: 1.6;
   min-height: 100vh;
+.logo{
+    font-family: "Rubik Pixels", cursive;
+    /* font-family: "Playfair Display"; */
+    font-size: 2.5rem;
+    color: #004225;
+    text-decoration: none;
 }
 
 /* ── Logo ── */
@@ -80,22 +86,26 @@ body {
   right: 0;
   z-index: 1000;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  /* align-items: center; */
   padding: 0.75rem 6rem;
-  margin-top: 2rem;
-  background-color: transparent;
+
   transition: box-shadow 0.3s ease, border-bottom 0.2s ease;
 }
 
 /* ── Nav list ── */
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0 1rem;
-  overflow: hidden;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    list-style-type: none;
+    margin: 1rem 0;
+    padding: 0rem 1rem;
+    overflow: hidden;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 li {
@@ -365,21 +375,44 @@ li a.active {
   border-top: 1px solid var(--olive-pale);
   margin-top: 12vw;
   padding: 1rem clamp(1rem, 5vw, 4rem);
+/* FOOTER */
+.footer{
+  background-color: #49796B;
+  color: #F9FFF9;
+  font-size: smaller;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  margin-top: 2rem;
+  padding: 1rem clamp(1rem, 5vw, 4rem);
+/* 
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  min-height: 50dvh; */
 }
 
-.footer-content { background-color: inherit; }
-
-.footer-section {
+.footer-content{
   background-color: inherit;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between sections */
+  width: 100%;
 }
 
-.footer-copyright {
-  justify-self: start;
+.footer-section{
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* wraps on small screens */
+  gap: 1rem;
+
+  /* grid-template-columns: 1fr auto 1fr; 1fr is "1 fraction" of the available space */
+}
+
+.footer-copyright{
+  text-align: left;
+  /* justify-self: start; */
   background-color: inherit;
   color: var(--off-white);
   font-size: 0.85rem;
@@ -474,4 +507,6 @@ li a.active {
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+  color: #49796B;
 }
