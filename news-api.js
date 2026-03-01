@@ -21,6 +21,12 @@ async function fetchNewsSuggestions(topic, numSuggestions) {
     }
 
     const data = await response.json();
+
+    if (data.message) {
+      suggestionsOutput.innerHTML = `<p class="error">${data.message}</p>`;
+      return;
+    }
+
     return data.suggestions;
   } catch (error) {
     console.error('Error fetching news:', error);
@@ -89,6 +95,6 @@ document.getElementById('fetchButton').addEventListener('click', async () => {
     suggestionsOutput.innerHTML = formatNewsSuggestions(suggestions);
   } catch (error) {
     console.error('Error:', error);
-    suggestionsOutput.innerHTML = '<p class="error">Failed to load suggestions. Please try again.</p>';
+    suggestionsOutput.innerHTML = `<p class="error">The topic "${topic}" could not be found. Please try a broader topic.</p>`;
   }
 });
