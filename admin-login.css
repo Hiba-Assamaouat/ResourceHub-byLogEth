@@ -1,1 +1,338 @@
+/* ADMIN LOGIN PAGE STYLES */
 
+/* -- PALETTE -- */
+/* Matches the main site palette in styles.css */
+
+:root {
+  --white:       #fafaf8;
+  --off-white:   #f2f1ec;
+  --olive:       #4a5c3a;
+  --olive-light: #6b7d57;
+  --olive-pale:  #d6dcc8;
+  --teal:        #2a6b65;
+  --teal-light:  #3d8f88;
+  --teal-pale:   #c2d8d6;
+  --ink:         #1e2420;
+  --muted:       #7a8a7c;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--off-white);
+  color: var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ── LEFT PANEL ── */
+.panel-left {
+  background-color: var(--olive);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 56px 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* decorative circles */
+.panel-left::before {
+  content: '';
+  position: absolute;
+  top: -90px; left: -90px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.panel-left::after {
+  content: '';
+  position: absolute;
+  bottom: 80px; right: -70px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: var(--teal);
+  opacity: 0.22;
+  filter: blur(48px);
+}
+
+.panel-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--olive-pale);
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s;
+}
+.panel-brand:hover { color: var(--white); }
+
+.panel-body {
+  position: relative;
+  z-index: 1;
+}
+
+.panel-body h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.panel-body h1 em {
+  font-style: italic;
+  color: var(--teal-pale);
+}
+
+.panel-body p {
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(250,250,248,0.6);
+  max-width: 320px;
+}
+
+.panel-notice {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 16px 18px;
+  max-width: 340px;
+}
+.panel-notice svg {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  stroke: var(--teal-pale);
+  fill: none;
+  stroke-width: 1.8;
+  margin-top: 2px;
+}
+.panel-notice p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.55);
+}
+.panel-notice p strong {
+  color: var(--teal-pale);
+  font-weight: 500;
+}
+
+.panel-footer {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── RIGHT PANEL ── */
+.panel-right {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px 52px;
+  overflow-y: auto;
+}
+
+.form-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.form-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 36px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-group input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background-color: var(--off-white);
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+.form-group input::placeholder { color: #b0b8ac; }
+.form-group input:focus {
+  background-color: var(--white);
+  border-color: var(--teal);
+}
+
+/* password show/hide toggle */
+.password-wrapper {
+  position: relative;
+}
+.password-wrapper input {
+  padding-right: 46px;
+}
+.toggle-pw {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.toggle-pw:hover { color: var(--teal); }
+.toggle-pw svg {
+  width: 16px; height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.form-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -10px;
+  margin-bottom: 28px;
+}
+.form-meta a {
+  font-size: 12.5px;
+  color: var(--teal);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.form-meta a:hover { color: var(--olive); text-decoration: underline; }
+
+.submit-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background-color: var(--teal);
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.submit-btn:hover {
+  background-color: var(--olive);
+  transform: translateY(-1px);
+}
+.submit-btn:active { transform: translateY(0); }
+
+/* error message */
+.error-msg {
+  display: none;
+  font-size: 13px;
+  color: #b94a48;
+  background: #fdf0ef;
+  border: 1px solid #f5c6c5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+}
+.error-msg.visible { display: block; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  font-size: 12.5px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--teal); }
+.back-link svg {
+  width: 13px; height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* hidden utility — toggled by admin-auth.js */
+.hidden { display: none !important; }
+
+.switch-link {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+.switch-link a {
+  color: var(--teal);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.switch-link a:hover { color: var(--olive); text-decoration: underline; }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.panel-left > * { animation: fadeUp 0.55s ease both; }
+.panel-left > *:nth-child(1) { animation-delay: 0.05s; }
+.panel-left > *:nth-child(2) { animation-delay: 0.15s; }
+.panel-left > *:nth-child(3) { animation-delay: 0.25s; }
+.panel-left > *:nth-child(4) { animation-delay: 0.35s; }
+.panel-right > * { animation: fadeUp 0.55s ease both; animation-delay: 0.2s; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  body { grid-template-columns: 1fr; }
+  .panel-left {
+    padding: 36px 28px;
+    min-height: auto;
+  }
+  .panel-left h1 { font-size: 38px; }
+  .panel-footer { display: none; }
+  .panel-right { padding: 40px 28px; }
+}

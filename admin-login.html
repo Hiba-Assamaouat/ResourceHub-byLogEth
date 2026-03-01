@@ -1,1 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — Resource Hub</title>
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="admin-login.css" />
+</head>
+<body>
+
+  <!-- LEFT PANEL -->
+  <div class="panel-left">
+    <a href="./" class="panel-brand">Log ♣︎ Eth</a>
+
+    <div class="panel-body">
+      <h1>Admin<br><em>Portal.</em></h1>
+      <p>Sign in to manage hackathon listings, review submissions, and publish events to the Resource Hub community.</p>
+    </div>
+
+    <div class="panel-notice">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p><strong>Restricted access.</strong> This portal is for verified hackathon organisers only. Unauthorised access attempts are logged.</p>
+    </div>
+
+    <div class="panel-footer">© 2026 Resource Hub. All rights reserved.</div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="panel-right">
+    <p class="form-eyebrow">Admin access</p>
+    <h2 class="form-title">Welcome back.</h2>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <!-- SIGN IN FORM -->
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input type="text" id="username" placeholder="admin@resourcehub.com" autocomplete="username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password" required />
+          <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+            <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-meta">
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="submit-btn">Sign In to Admin</button>
+
+      <p class="switch-link">
+        Don't have an account? <a href="#" id="showRegister">Request access</a>
+      </p>
+    </form>
+
+    <!-- REQUEST ACCESS FORM (hidden by default) -->
+    <form id="registerForm" class="hidden" novalidate>
+      <div class="form-group">
+        <label for="regName">Full Name</label>
+        <input type="text" id="regName" placeholder="Jane Doe" required />
+      </div>
+
+      <div class="form-group">
+        <label for="regOrg">Organisation / Hackathon Name</label>
+        <input type="text" id="regOrg" placeholder="HackMIT, DevPost, etc." required />
+      </div>
+
+      <div class="form-group">
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" placeholder="jane@organisation.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required />
+      </div>
+
+      <div class="form-group">
+        <label for="regConfirm">Confirm Password</label>
+        <input type="password" id="regConfirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required />
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Request</button>
+
+      <p class="switch-link">
+        Already have an account? <a href="#" id="showLogin">Sign in</a>
+      </p>
+    </form>
+
+    <a href="./" class="back-link">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Resource Hub
+    </a>
+  </div>
+
+  <script>
+    // Show/hide password toggle
+    const toggleBtn = document.getElementById('togglePw');
+    const pwInput   = document.getElementById('password');
+    const eyeIcon   = document.getElementById('eyeIcon');
+    const eyeOpen   = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+    const eyeClosed = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
+
+    toggleBtn?.addEventListener('click', () => {
+      const isPassword = pwInput.type === 'password';
+      pwInput.type = isPassword ? 'text' : 'password';
+      eyeIcon.innerHTML = isPassword ? eyeClosed : eyeOpen;
+      toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+    });
+  </script>
+
+  <!-- Firebase backend -->
+  <script type="module" src="./admin-auth.js"></script>
+
+</body>
+</html>
