@@ -88,14 +88,17 @@
 
         <div class="input-group">
           <label for="topicInput">Topic</label>
+
+          <!-- topic input -->
           <input type="text" id="topicInput" placeholder="e.g., AI ethics">
         </div>
 
         <div class="input-group">
           <label for="numSuggestionsInput">Number of suggestions</label>
+          
+          <!-- no. of suggestions input -->
           <input type="number" id="numSuggestionsInput" value="3" min="1" max="20">
         </div>
-
         <button id="fetchButton">Fetch News</button>
       </div>
     </div>
@@ -134,13 +137,14 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-
   <!-- Firebase admin guard -->
   <script type="module">
     import { guardAdminPage } from "./admin-auth.js";
     guardAdminPage();
   </script>
+
+  <!-- <script src="script.js"></script> -->
+  <script src="news-api.js"></script>
 
 </body>
 </html>

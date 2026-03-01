@@ -55,10 +55,8 @@ html {
   justify-content: space-between;
   /* align-items: center; */
   padding: 0.75rem 6rem;
-
   transition: box-shadow 0.3s ease, border-bottom 0.2s ease;
 }
-
 
 .navbar{
   top: 0;
@@ -337,13 +335,14 @@ li a.active {
 
 .main-content {
   max-width: 1200px;
-  margin: 200px 5vw 0; /* top | left-right auto | bottom */
+  margin: 170px 5vw 0; /* top | left-right auto | bottom */
   padding: 2rem;
 }
 
 .landing-content {
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 0 3rem 3rem;
+  flex-basis: 50%;
 }
 
 .landing-content h1 {
@@ -373,6 +372,7 @@ li a.active {
   flex: 1;
   background-color: #fff;
   padding: 1.5rem;
+  margin: 4rem 0;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -418,41 +418,46 @@ li a.active {
   flex: 2;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-template-rows: repeat(6, minmax(100px, 1fr));
+  /* grid-template-rows: minmax(100px, auto); */
   gap: 1rem;
-  min-height: 500px;
+  align-items: start;
+  grid-auto-rows: min-content;
 }
 
 .card {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
-  box-shadow: 10px 10px 15px #cfddcf,
-            -10px -10px 15px #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+  background:
+    linear-gradient(145deg, #49796B, #002e1a);
 
+  border-radius: 18px;
+  padding: 1.5rem;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  transition: all 0.3s ease;
+}
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow:12px 12px 25px rgba(0,0,0,0.35);
+  cursor: pointer
 }
 
 .card h3 {
   font-size: 1.2rem;
-  color: #2c3e50;
-  background-color: white;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  color: white;
+  background-color: transparent;
   margin-bottom: 1rem;
 }
 
 .card p {
   font-size: 0.9rem;
-  color: #555;
-  background-color: white;
+  color: #F9FFF9;
+  background-color: transparent;
 }
 
 /* Card Sizes */
@@ -467,7 +472,7 @@ li a.active {
 }
 
 .card-small {
-  grid-row: span 1;
+  grid-row: span 2;
   grid-column: span 1;
 }
 

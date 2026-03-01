@@ -1,69 +1,46 @@
-# Flask backend for fetching news suggestions using Mistral API
-
-# API key is storedin the .env file and .env is added to .gitignore to avoid exposing it in version control.
-
-#!/usr/bin/env python3
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import requests
-from dotenv import load_dotenv
 from mistralai import Mistral
+from dotenv import load_dotenv, find_dotenv
+from mistralai.models import Tool, WebSearchTool
 
 
-#env variables
-load_dotenv()
+
+# load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
+load_dotenv(find_dotenv(), override=True)
 API_KEY = os.getenv("MISTRAL_API_KEY")
+
+print("API KEY loaded:", bool(API_KEY))
 
 client = Mistral(api_key=API_KEY)
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
-
-news_agent_id = None # in reality, we would need a database to store the agent ID and reuse it across requests but for simplicity, we will create a new agent on each run.
-
-def create_news_agent():
-    """Creates a news-fetching agent with web search capabilities."""
-    global news_agent_id
-    agent = client.beta.agents.create(
-        model="mistral-medium-latest",
-        name="Tech News Fetcher",
-        description="An agent that fetches and summarizes the latest tech news based on user queries.",
-        tools=[{"type": "web_search"}]  # Enable web search for up-to-date news
-    )
-    news_agent_id = agent.id
-    return agent.id
-
+CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type"], methods=["GET", "POST", "OPTIONS"])
 
 @app.route('/fetch-news', methods=['POST'])
 def fetch_news():
-    global news_agent_id
-
-    # Create the agent if it doesn't exist
-    if not news_agent_id:
-        create_news_agent()
-
     data = request.json
     topic = data.get('topic', '')
     num_suggestions = data.get('num_suggestions', 3)
 
     try:
-        response = client.beta.agents.complete(
-            agent_id=news_agent_id,
+        response = client.chat.complete(
+            model="mistral-small-latest",
             messages=[
                 {
                     "role": "user",
                     "content": f"""
-                    Fetch the latest {num_suggestions} news articles about '{topic}'.
+                    You must return EXACTLY {num_suggestions} news articles about '{topic}'. Not more, not less.
                     Conditions:
-                    - Only include articles from the last 7 days.
-                    - Prioritize reputable sources like TechCrunch, Wired, or Reuters.
+                    - EXCLUSIVELY include articles from February 2026.
+                    - Prioritize reputable Moroccan sources (TelQuel, Morocco World News, Hespress), LinkedIn posts, and ONLY if not enough recent articles are found should you suggest international sources (TechCrunch, Wired, Reuters).
+                    - If you cannot find enough recent articles, return as many as you can but ABSOLUTELY DO NOT fabricate or repeat articles to meet the quota.
                     - For each article, provide:
                       1. Title
                       2. Date
                       3. Brief summary
-                      4. Source URL
+                      4. EXACT Article Source URL
                       5. Reliability score (in %)
                     Format your response as a numbered list.
                     """
@@ -71,9 +48,22 @@ def fetch_news():
             ]
         )
         suggestions = response.choices[0].message.content
+        print("RESPONSE:", suggestions)
         return jsonify({"suggestions": suggestions})
+    except Exception as e:
+        print("ERROR:", str(e))  # for debugging
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/test-key', methods=['GET'])
+def test_key():
+    try:
+        response = client.chat.complete(
+            model="mistral-small-latest",
+            messages=[{"role": "user", "content": "say hello"}]
+        )
+        return jsonify({"result": response.choices[0].message.content})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5001)
