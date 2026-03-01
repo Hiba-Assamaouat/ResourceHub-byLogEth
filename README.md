@@ -31,7 +31,7 @@ This will be essentially applied for point `[5]` from the feature list above whe
 ---
 
 Frontend - HTML | CSS | JavaScript <br>
-Backend - Python | Flask | Node?
+Backend - Python | Flask | Firebase
 
 ---
 Quick UI setup
