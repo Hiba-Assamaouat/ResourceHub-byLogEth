@@ -65,3 +65,41 @@ document.getElementById("customGoogleBtn").addEventListener("click", function() 
 });
 
 // initializeGoogleSignIn();
+
+
+
+
+// ===== API CALLS =====
+async function fetchNewsSuggestions(topic, numSuggestions) {
+  const response = await fetch('http://localhost:5000/fetch-news', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      topic: topic,
+      num_suggestions: numSuggestions,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch news');
+  }
+
+  const data = await response.json();
+  return data.suggestions;
+}
+
+// Example usage in your UI
+document.getElementById('fetchButton').addEventListener('click', async () => {
+  const topic = document.getElementById('topicInput').value;
+  const numSuggestions = document.getElementById('numSuggestionsInput').value;
+
+  try {
+    const suggestions = await fetchNewsSuggestions(topic, numSuggestions);
+    document.getElementById('suggestionsOutput').innerText = suggestions;
+  } catch (error) {
+    console.error('Error:', error);
+    document.getElementById('suggestionsOutput').innerText = 'Failed to load suggestions.';
+  }
+});
