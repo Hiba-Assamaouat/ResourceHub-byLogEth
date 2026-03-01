@@ -31,7 +31,7 @@ This will be essentially applied for point `[5]` from the feature list above whe
 ---
 
 Frontend - HTML | CSS | JavaScript <br>
-Backend - 
+Backend - Python | Flask | Node?
 
 ---
 Quick UI setup
@@ -57,3 +57,6 @@ About the Admin Portal
 
 This interface, initially, will mainly be for the news recommendation using the Mistral API.<br>
 Further down the line, this page will also allow admin to visualize activity and performance data of the website.
+
+For the tech news agent, we are using the Mistral API key provided by the hackathon organizers.
+The script to run the agent was written on Python.

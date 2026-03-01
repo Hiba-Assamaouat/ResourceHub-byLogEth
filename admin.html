@@ -1,6 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resource Hub</title>
+  <!-- <link rel="icon" type="image/png" href=""/> -->
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Rubik+Pixels&family=VT323&display=swap" rel="stylesheet">
 
+  <!-- Google Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home" />
 
-<!-- Log in -->
+  <!-- Font Awesome (Socials) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Log out -->
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google Sign-In -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="main-wrapper">
+      <div class="portal-title">
+        <div class="LogEth">Log♧Eth</div>
+        <div class="admin-portal">Admin Portal</div>
+      </div>
+    </div>
+  </header>
+
+<!-- Main Content -->
+<main class="admin-content">
+  <a class="return-link" href="index.html">&#x2039; return to homepage</a>
+
+  <div class="admin-grid">
+
+    <!-- Left column: output -->
+    <div class="admin-output-col">
+      <h2 class="admin-section-title">Results</h2>
+      <div id="suggestionsOutput" class="suggestions-output">
+        <p class="output-placeholder">Your fetched articles will appear here.</p>
+      </div>
+    </div>
+
+    <!-- Right column: image + inputs -->
+    <div class="admin-control-col">
+      <img src="images/newspaper-coffee-hd.png" alt="newspaper-coffee pixelart" class="admin-image" width="100">
+
+      <div class="agent-card">
+        <h2 class="admin-section-title">Fetch News</h2>
+
+        <div class="input-group">
+          <label for="topicInput">Topic</label>
+          <input type="text" id="topicInput" placeholder="e.g., AI ethics">
+        </div>
+
+        <div class="input-group">
+          <label for="numSuggestionsInput">Number of suggestions</label>
+          <input type="number" id="numSuggestionsInput" value="3" min="1" max="20">
+        </div>
+
+        <button id="fetchButton">Fetch News</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+
+      <div class="footer-section">
+        <div class="footer-copyright">
+          &copy; 2026 Logos et Ethos.<br>
+          <a href="./admin.html" class="admin-portal-link">Admin Portal</a>
+        </div>
+        <div class="footer-signature">Log ♣︎ Eth</div>
+        <div class="footer-socials">
+          <a href="" target="_blank" aria-label="LinkedIn" class="fa fa-linkedin"></a>
+          <a href="https://github.com/Hiba-Assamaouat" target="_blank" aria-label="GitHub" class="fa fa-github"></a>
+          <a href="" target="_blank" aria-label="Envelope" class="fa fa-envelope"></a>
+        </div>
+      </div>
+
+      <!-- Footer Navigation -->
+      <nav class="footer-links">
+        <a href="./index.html">Home</a> ♧
+        <a href="/1-events.html">Events</a> ♧
+        <a href="/2-spots.html">Spots</a> ♧
+        <a href="/3-articles.html">Articles</a> ♧
+        <a href="/4-latest.html">The Latest</a> ♧
+        <a href="/5-contact.html">Contact</a> ♧
+        <a href="/6-signup.html">Sign Up</a>
+      </nav>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
