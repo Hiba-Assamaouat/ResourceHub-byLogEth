@@ -27,51 +27,61 @@
 
 <body>
 
-  <!-- Navigation Bar -->
-  <header>
-    <div class="main-wrapper">
+  <header style="position: relative;">
+    <div class="admin-wrapper">
       <div class="portal-title">
+
         <div class="LogEth">Log♧Eth</div>
         <div class="admin-portal">Admin Portal</div>
+
+        <img src="images/newspaper-coffee-hd.png" alt="newspaper-coffee pixelart" class="admin-image" width="10">
+
+        <button id="adminSignOutBtn" onclick="import('./admin-auth.js').then(m => m.adminSignOut())" style="
+          font-family: inherit;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: var(--white, #fafaf8);
+          background-color: var(--teal, #2a6b65);
+          border: none;
+          border-radius: 8px;
+          padding: 9px 20px;
+          cursor: pointer;
+          margin-left: 16px;
+          transition: background 0.2s;
+          align-items: center;
+          justify-self: end;
+        " onmouseover="this.style.backgroundColor='var(--olive,#e86100)'"
+           onmouseout="this.style.backgroundColor='var(--teal,#2a6b65)'">
+          Sign Out
+        </button>
       </div>
     </div>
   </header>
 
 <!-- Main Content -->
 <main class="admin-content">
-  <a class="return-link" href="index.html">&#x2039; return to homepage</a>
-  <button id="adminSignOutBtn" onclick="import('./admin-auth.js').then(m => m.adminSignOut())" style="
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--white, #fafaf8);
-    background-color: var(--teal, #2a6b65);
-    border: none;
-    border-radius: 8px;
-    padding: 9px 20px;
-    cursor: pointer;
-    margin-left: 16px;
-    transition: background 0.2s;
-  " onmouseover="this.style.backgroundColor='var(--olive,#4a5c3a)'"
-     onmouseout="this.style.backgroundColor='var(--teal,#2a6b65)'">
-    Sign Out
-  </button>
 
+
+    
   <div class="admin-grid">
 
-    <!-- Left column: output -->
+    <!-- left column: output -->
     <div class="admin-output-col">
-      <h2 class="admin-section-title">Results</h2>
+        <!-- <a class="return-link" href="index.html">&#x2039; return to homepage</a> -->
+      <h2 class="admin-section-title" style="background-color: #F9FFF9;">Results</h2>
       <div id="suggestionsOutput" class="suggestions-output">
         <p class="output-placeholder">Your fetched articles will appear here.</p>
       </div>
     </div>
 
-    <!-- Right column: image + inputs -->
+    <!-- right column: inputs -->
     <div class="admin-control-col">
-      <img src="images/newspaper-coffee-hd.png" alt="newspaper-coffee pixelart" class="admin-image" width="100">
+      <h1>Tech News Fetcher</h1>
+      <!-- <div id="suggestionsOutput">
+          <p>Enter a topic and click "Fetch News" to get started.</p>
+      </div> -->
 
       <div class="agent-card">
         <h2 class="admin-section-title">Fetch News</h2>
