@@ -40,6 +40,24 @@
 <!-- Main Content -->
 <main class="admin-content">
   <a class="return-link" href="index.html">&#x2039; return to homepage</a>
+  <button id="adminSignOutBtn" onclick="import('./admin-auth.js').then(m => m.adminSignOut())" style="
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white, #fafaf8);
+    background-color: var(--teal, #2a6b65);
+    border: none;
+    border-radius: 8px;
+    padding: 9px 20px;
+    cursor: pointer;
+    margin-left: 16px;
+    transition: background 0.2s;
+  " onmouseover="this.style.backgroundColor='var(--olive,#4a5c3a)'"
+     onmouseout="this.style.backgroundColor='var(--teal,#2a6b65)'">
+    Sign Out
+  </button>
 
   <div class="admin-grid">
 
@@ -107,6 +125,12 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- Firebase admin guard -->
+  <script type="module">
+    import { guardAdminPage } from "./admin-auth.js";
+    guardAdminPage();
+  </script>
 
 </body>
 </html>
