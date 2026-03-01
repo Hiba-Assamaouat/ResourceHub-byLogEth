@@ -29,11 +29,11 @@ import {
 //    uid          – string
 //    email        – string
 //    name         – string
-//    organisation – string   (hackathon org they represent)
+//    organisation – string
 //    status       – "pending" | "approved" | "rejected"
 //    role         – "admin"
 //    requestedAt  – timestamp
-//    approvedAt   – timestamp (set by super-admin)
+//    approvedAt   – timestamp (set by you in Firebase Console)
 //
 // ─────────────────────────────────────────────────────────────
 
@@ -45,7 +45,6 @@ export async function adminSignIn(email, password) {
     const result = await signInWithEmailAndPassword(auth, email, password);
     const uid    = result.user.uid;
 
-    // Check Firestore for admin record
     const adminSnap = await getDoc(doc(db, "admins", uid));
 
     if (!adminSnap.exists()) {
@@ -58,7 +57,7 @@ export async function adminSignIn(email, password) {
 
     if (adminData.status === "pending") {
       await signOut(auth);
-      showError("Your account is pending approval. You'll receive an email once approved.");
+      showError("Your account is pending approval. You'll be notified once approved.");
       return;
     }
 
@@ -69,12 +68,10 @@ export async function adminSignIn(email, password) {
     }
 
     if (adminData.status === "approved" && adminData.role === "admin") {
-      // ✅ All good — send to admin dashboard
       window.location.href = "./admin.html";
       return;
     }
 
-    // Fallback
     await signOut(auth);
     showError("Access denied. Please contact the site administrator.");
 
@@ -87,17 +84,11 @@ export async function adminSignIn(email, password) {
 
 // ── Request Admin Access (self-register) ─────────────────────
 
-/**
- * Creates a Firebase Auth account AND a Firestore "admins" doc
- * with status: "pending". A super-admin must approve it before
- * this person can log in.
- */
 export async function requestAdminAccess(email, password, name, organisation) {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const uid    = result.user.uid;
 
-    // Write pending admin record
     await setDoc(doc(db, "admins", uid), {
       uid,
       email,
@@ -109,10 +100,8 @@ export async function requestAdminAccess(email, password, name, organisation) {
       approvedAt:  null,
     });
 
-    // Sign them out immediately — they must wait for approval
     await signOut(auth);
-
-    showSuccess("Request submitted! You'll be notified by email once approved.");
+    showSuccess("Request submitted! You will be notified by email once approved.");
 
   } catch (err) {
     console.error("Admin registration error:", err);
@@ -130,14 +119,7 @@ export async function adminSignOut() {
 
 
 // ── Guard: protect admin.html ────────────────────────────────
-/**
- * Call this at the top of admin.html's script.
- * Redirects unauthenticated or non-approved users away immediately.
- *
- * Usage in admin.html:
- *   import { guardAdminPage } from "./admin-auth.js";
- *   guardAdminPage();
- */
+
 export function guardAdminPage() {
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -160,28 +142,31 @@ export function guardAdminPage() {
 function showError(message) {
   const el = document.getElementById("errorMsg");
   if (!el) return;
-  el.textContent = message;
+  el.textContent        = message;
+  el.style.color        = "#b94a48";
+  el.style.background   = "#fdf0ef";
+  el.style.borderColor  = "#f5c6c5";
   el.classList.add("visible");
 }
 
 function showSuccess(message) {
   const el = document.getElementById("errorMsg");
   if (!el) return;
-  el.textContent = message;
-  el.style.color           = "#2a6b65";
-  el.style.background      = "#eaf4f3";
-  el.style.borderColor     = "#c2d8d6";
+  el.textContent        = message;
+  el.style.color        = "#2a6b65";
+  el.style.background   = "#eaf4f3";
+  el.style.borderColor  = "#c2d8d6";
   el.classList.add("visible");
 }
 
 function friendlyError(code) {
   const map = {
-    "auth/user-not-found":       "No account found with that email.",
-    "auth/wrong-password":       "Incorrect password.",
-    "auth/invalid-email":        "Please enter a valid email address.",
-    "auth/email-already-in-use": "An account with this email already exists.",
-    "auth/weak-password":        "Password must be at least 6 characters.",
-    "auth/too-many-requests":    "Too many attempts. Please wait a moment.",
+    "auth/user-not-found":         "No account found with that email.",
+    "auth/wrong-password":         "Incorrect password.",
+    "auth/invalid-email":          "Please enter a valid email address.",
+    "auth/email-already-in-use":   "An account with this email already exists.",
+    "auth/weak-password":          "Password must be at least 6 characters.",
+    "auth/too-many-requests":      "Too many attempts. Please wait a moment.",
     "auth/network-request-failed": "Network error. Check your connection.",
   };
   return map[code] ?? "Something went wrong. Please try again.";
@@ -189,65 +174,70 @@ function friendlyError(code) {
 
 
 // ── Wire up admin-login.html form ────────────────────────────
-// Note: no DOMContentLoaded wrapper needed — module scripts are
-// automatically deferred and run after the DOM is ready.
+// Wrapped in a page check so this safely does nothing when
+// admin-auth.js is imported from admin.html for guardAdminPage().
 
-const loginForm    = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
-const showRegister = document.getElementById("showRegister");
-const showLogin    = document.getElementById("showLogin");
+if (document.getElementById("loginForm")) {
 
-// Toggle between sign-in and register panels
-showRegister?.addEventListener("click", (e) => {
-  e.preventDefault();
-  loginForm?.classList.add("hidden");
-  registerForm?.classList.remove("hidden");
-  document.querySelector(".form-title").textContent  = "Request access.";
-  document.querySelector(".form-eyebrow").textContent = "New admin";
-});
+  const loginForm    = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+  const showRegister = document.getElementById("showRegister");
+  const showLogin    = document.getElementById("showLogin");
+  const formTitle    = document.querySelector(".form-title");
+  const formEyebrow  = document.querySelector(".form-eyebrow");
 
-showLogin?.addEventListener("click", (e) => {
-  e.preventDefault();
-  registerForm?.classList.add("hidden");
-  loginForm?.classList.remove("hidden");
-  document.querySelector(".form-title").textContent  = "Welcome back.";
-  document.querySelector(".form-eyebrow").textContent = "Admin access";
-});
+  // Show register form
+  showRegister?.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
+    if (formTitle)   formTitle.textContent   = "Request access.";
+    if (formEyebrow) formEyebrow.textContent = "New admin";
+  });
 
-// Sign-in submit
-loginForm?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const email    = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value;
+  // Back to sign-in
+  showLogin?.addEventListener("click", (e) => {
+    e.preventDefault();
+    registerForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
+    if (formTitle)   formTitle.textContent   = "Welcome back.";
+    if (formEyebrow) formEyebrow.textContent = "Admin access";
+  });
 
-  if (!email || !password) {
-    showError("Please fill in both fields.");
-    return;
-  }
-  await adminSignIn(email, password);
-});
+  // Sign-in submit
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email    = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    if (!email || !password) {
+      showError("Please fill in both fields.");
+      return;
+    }
+    await adminSignIn(email, password);
+  });
 
-// Registration submit
-registerForm?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const name         = document.getElementById("regName").value.trim();
-  const organisation = document.getElementById("regOrg").value.trim();
-  const email        = document.getElementById("regEmail").value.trim();
-  const password     = document.getElementById("regPassword").value;
-  const confirm      = document.getElementById("regConfirm").value;
+  // Registration submit
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name         = document.getElementById("regName").value.trim();
+    const organisation = document.getElementById("regOrg").value.trim();
+    const email        = document.getElementById("regEmail").value.trim();
+    const password     = document.getElementById("regPassword").value;
+    const confirm      = document.getElementById("regConfirm").value;
 
-  if (!name || !organisation || !email || !password) {
-    showError("Please fill in all fields.");
-    return;
-  }
-  if (password !== confirm) {
-    showError("Passwords do not match.");
-    return;
-  }
-  if (password.length < 6) {
-    showError("Password must be at least 6 characters.");
-    return;
-  }
+    if (!name || !organisation || !email || !password) {
+      showError("Please fill in all fields.");
+      return;
+    }
+    if (password !== confirm) {
+      showError("Passwords do not match.");
+      return;
+    }
+    if (password.length < 6) {
+      showError("Password must be at least 6 characters.");
+      return;
+    }
+    await requestAdminAccess(email, password, name, organisation);
+  });
 
-  await requestAdminAccess(email, password, name, organisation);
-});
+} // end page guard
