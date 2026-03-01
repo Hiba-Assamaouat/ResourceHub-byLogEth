@@ -3,14 +3,8 @@
 //  Fetches tech events based on user filters using Mistral API
 // ============================================================
 
-// ── Config ──────────────────────────────────────────────────
-// Your Mistral API key — store this in a .env file and load
-// it via your build tool (Vite: import.meta.env.VITE_MISTRAL_KEY)
-// For now it reads from window.MISTRAL_API_KEY which you can
-// set in a separate config.js file excluded from git.
-// See instructions at the bottom of this file.
+import { MISTRAL_API_KEY } from "./config.js";
 
-const MISTRAL_API_KEY = window.MISTRAL_API_KEY ?? "";
 const MISTRAL_MODEL   = "mistral-large-latest";
 const MISTRAL_URL     = "https://api.mistral.ai/v1/chat/completions";
 
