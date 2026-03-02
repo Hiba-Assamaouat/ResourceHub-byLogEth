@@ -1,4 +1,4 @@
-# Resource Hub - Morocco - A LogEth Project
+# Resource Hub - A LogEth Project
 
 This project is a part of the 2026 [Mistral AI](https://mistral.ai/) Online Hackathon, hosted by [Iterate](https://hackiterate.com/)
 
@@ -10,7 +10,7 @@ This project is a part of the 2026 [Mistral AI](https://mistral.ai/) Online Hack
 ---
 
 ### Definition
-Resource hub for young professionals and students across the Kingdom of Morocco to encourage growth towards the numeric transition. A website to gather tech afficionados and professionals, a space for exchange and learning.
+Resource hub for young professionals and students to encourage growth towards the numeric transition. A website to gather tech afficionados and professionals, a space for exchange and learning.
 
 This page is a __moderated community-centered platform__.
   users will find resources including:
