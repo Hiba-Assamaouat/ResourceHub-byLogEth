@@ -59,4 +59,7 @@ This interface, initially, will mainly be for the news recommendation using the 
 Further down the line, this page will also allow admin to visualize activity and performance data of the website.
 
 For the tech news agent, we are using the Mistral API key provided by the hackathon organizers.
+
+ Update: the key did not work for some reason, a ew key was retrieved via [console.mistral.ai](https://console.mistral.ai/)
+
 The script to run the agent was written on Python.
