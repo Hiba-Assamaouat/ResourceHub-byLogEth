@@ -90,3 +90,5 @@ Future Improvements:
 - Adding a database to persist fetched articles and avoid redundant API calls.
 
 Despite the technical hurdles encountered, the project successfully demonstrates a functional AI-powered news fetching pipeline that combines real article retrieval with intelligent summarization. The debugging process itself was a valuable learning experience. What started as a simple idea quickly revealed the complexity of building with real APIs under real constraints. All in all, this hackathon was a way for us to push ourselves and to explore a domain that isn't our specialties (relatively far from it in fact).
+
+[Link to video demo](https://youtu.be/_N4wcFFfdbo)
