@@ -51,7 +51,7 @@ About the User Sign In Portal
 &rarr; for the time-being, sign in will be only powered by Google
 
 ---
-About the Admin Portal
+*__About the Admin Portal__*
 
 &rarr; access requires a sign in with an admin password
 
@@ -60,6 +60,33 @@ Further down the line, this page will also allow admin to visualize activity and
 
 For the tech news agent, we are using the Mistral API key provided by the hackathon organizers.
 
- Update: the key did not work for some reason, a ew key was retrieved via [console.mistral.ai](https://console.mistral.ai/)
+ *Update*: the key did not work for some reason, a new key was retrieved via [console.mistral.ai](https://console.mistral.ai/)
 
 The script to run the agent was written on Python.
+
+Mistral's Agent Endpoints were used (see [mistral documentation](https://docs.mistral.ai/api/endpoint/agents))
+
+And to enhance the search, an additional api, specific to news search, was added. It is called [NewsApi](https://newsapi.org/). We initially attempted to make it work without this api, trying to make the Mistral API retrieve data directly from the `WebSearchTool` from the mistralai models, however errors kept emerging and could not be debugged with the amount of skill we have.
+
+Therefore, we end up with NewsAPI fetching real articles, then Mistral processing and summarizing them.
+
+Using Flask, the backend manages admin requests and coordinates communication between the News API and Mistral API to fetch and process curated tech articles.
+
+Some technical issues encountered included:
+- a port conflict on CORS (we ended up replacing port 5000 to 5001 due to macOS Airplay conflict).
+- The `WebSearchTool` from the mistralai SDK could not be properly formatted to pass validation, despite multiple attempts with different tool formats and direct API calls.
+- The `.env` file was not being reliably picked up by `load_dotenv`, causing the API key to not load correctly until `override=True` and `find_dotenv()` were explicitly used.
+
+Limitations:
+- Mistral API operating alone would invent news just to abide by the set requirements.
+- Although News API solved the issue by fetching actual articles, the api's search requirements could not be customized as freely as with Mistral only, therefore the outputs (the returned articles) often were far-fetched and unrelated to requested topics and themes.
+- NewsAPI's free tier limits coverage of non-English and regional sources, making it difficult to surface news specific to a country or region.
+- the number of daily requests on news api on the free tier is capped, which limits scalability.
+
+Future Improvements:
+- Testing out another API with richer filtering options (by region, language, and domain) to overcome the relevance limitations described above.
+- Gaining access to a higher Mistral API tier to properly leverage the WebSearchTool for real-time search on the worldwide web.
+- Fine-tuning our own model just for tech-related news.
+- Adding a database to persist fetched articles and avoid redundant API calls.
+
+Despite the technical hurdles encountered, the project successfully demonstrates a functional AI-powered news fetching pipeline that combines real article retrieval with intelligent summarization. The debugging process itself was a valuable learning experience. What started as a simple idea quickly revealed the complexity of building with real APIs under real constraints. All in all, this hackathon was a way for us to push ourselves and to explore a domain that isn't our specialties (relatively far from it in fact).
